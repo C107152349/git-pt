@@ -13,8 +13,8 @@ sendbtn.addEventListener("click",function(){
     })
 })
 async function loadmodel(){
-    let model = await tf.loadLayersModel(
-        tf.io.browserFiles([jsonUpload.files[1], jsonUpload.files[0]]));
+    let model = await tf.loadLayersModel('https://c107152349.github.io/git-pt/tfjsmodel/model.json');
+        //tf.io.browserFiles([jsonUpload.files[1], jsonUpload.files[0]]));
     return model;  
 }
 upload.addEventListener('click',function(){
