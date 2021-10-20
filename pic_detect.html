@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-vis"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
+</head>
+<body>
+    <canvas id="canvas1">瀏覽器尚不支援</canvas>
+    <img id="img"/>
+    <br/>
+    <input type="file" id="img_input" accept="image/*" onchange='saveimg(this)'/>
+    <button type="button" id="sendbtn">Send out</button>
+    <br/><br/><br/>
+    <input type="file" id="json-upload" multiple/>
+    <input type="file" id="weights-upload"/><br/>
+    <button type="button" id="upload">upload</button>
+    <script src="./pic_detect.js" type="module"></script>
+    <script>
+        let canvas1 = document.getElementById("canvas1");
+        let ctx = canvas1.getContext("2d");
+        let img = new Image();
+        //let img = document.getElementById('img')
+        function saveimg(e){
+            let file = e.files[0];
+            let reader = new FileReader;
+            reader.onloadend = function(ee){
+                img.src = ee.target.result;
+            };
+            reader.readAsDataURL(file)
+            img.onload = function() {
+                canvas1.width = img.width;
+                canvas1.height = img.height
+                ctx.drawImage(img,0,0)
+                URL.revokeObjectURL(img.src) // free memory
+            } 
+        }
+    </script>
+    <script src="https://c107152349.github.io/git-pt/pic_detect.js" type="module"></script>
+    
+</html>
